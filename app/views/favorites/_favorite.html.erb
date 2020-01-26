@@ -1,0 +1,15 @@
+<% if book.favorited_by?(current_user) %>
+  <div class="fav">
+    <%= link_to book_favorites_path(book), method: :delete do %>
+      <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
+      <%= book.favorites.count %>
+    <% end %>
+  </div>
+<% else %>
+  <div class="fav">
+    <%= link_to book_favorites_path(book), method: :post do %>
+      <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+      <%= book.favorites.count %>
+    <% end %>
+  </div>
+<% end %>

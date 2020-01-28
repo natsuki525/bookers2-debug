@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable,:validatable
 
   has_many :books
+  accepts_nested_attributes_for :books
   has_many :book_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
@@ -25,6 +26,20 @@ class User < ApplicationRecord
 
 
   attachment :profile_image, destroy: false
+
+  def self.search(divide_method,word)
+    if divide_method == "1"
+      users = User.where("name LIKE?", "#{word}")
+    elsif divide_method == "2"
+      users = User.where("name LIKE?", "#{word}%")
+    elsif divide_method == "3"
+      users = User.where("name LIKE?", "%#{word}")
+    elsif divide_method == "4"
+      users = User.where("name LIKE?", "%#{word}%")
+    else
+      users = User.all
+    end
+  end
 
   #バリデーションは該当するモデルに設定する。エラーにする条件を設定できる。
   validates :name, presence: true, length: {maximum: 20, minimum: 2}

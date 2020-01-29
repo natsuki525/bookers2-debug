@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'rooms/show'
   devise_for :users
   devise_scope :user do
       root :to => 'home#top'

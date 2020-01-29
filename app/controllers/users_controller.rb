@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 
       unless @isRoom
         @room = Room.new
-        @user_room = UserRoom.new
+        @UserRoom = UserRoom.new
       end
     end
   end

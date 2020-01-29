@@ -1,0 +1,10 @@
+<% book.book_comments.each do |book_comment| %>
+	<%= link_to user_path(book_comment.user), class: "username" do %>
+		<%= book_comment.user.name %>
+	<% end %>
+	<%= book_comment.created_at.strftime('%Y/%m/%d') %>
+	<%= book_comment.comment %>
+			<!-- コメント削除ボタン -->
+	<%= link_to "DELETE", book_book_comments_path(book_id: book, id: book_comment.id), method: :delete, remote: true %><br>
+			<!-- コメント削除ボタン -->
+  <% end %>

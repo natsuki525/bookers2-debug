@@ -1,2 +1,16 @@
-<h1>Rooms#show</h1>
-<p>Find me in app/views/rooms/show.html.erb</p>
+<h1><%= @room.name %></h1>
+
+<h4>参加者</h4>
+<% @entries.each do |e| %>
+  <%= link_to e.user.name, user_path(e.user_id) %>
+<% end %>
+
+<h1>Chat room</h1>
+<form>
+  <label>Say something:</label><br>
+  <input type="text" id="chat-input" data-behavior="room_speaker">
+</form>
+
+<div id="direct_messages" data-room_id="<%= @room.id %>">
+  <%= render @chats %>
+</div>

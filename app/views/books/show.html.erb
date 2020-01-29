@@ -43,31 +43,22 @@
 				</tr>
 			</table>
 
+		<div id="comments_area">
 		<!-- コメント表示 -->
-		<% @book.book_comments.each do |book_comment| %>
-				<%= link_to user_path(@user) do %>
-					<%= book_comment.user.name %>
-				<% end %>
-			<%= book_comment.created_at.strftime('%Y/%m/%d') %>
-			<%= book_comment.comment %>
-			<!-- コメント削除ボタン -->
-			<%= link_to "DELETE", book_book_comments_path(book_id: @book, id: book_comment.id), method: :delete %>
-			<!-- コメント削除ボタン -->
-   		<% end %>
-
+		<%= render 'book_comments/comments', book: @book %>
 		<!-- コメント表示終了 -->
-
-
+</div>
 		<!-- コメント入力フォーム -->
-		<%= form_for [@book, @book_comment] do |f| %>
-		<div class="comment_form">
-            <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
-    	</div>
-    	<div class="action">
-    	<%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
-		</div>
+		<%= form_with model:[@book, @book_comment], data:{ remote: true } do |f| %>
+			<div class="comment_form">
+            	<%= f.text_area :comment, rows:"5", placeholder: "コメントを入力してください。"%>
+    		</div>
+    		<div class="action">
+    			<%= f.submit type: "submit", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+			</div>
 		<% end %>
 		<!-- コメント入力フォーム終了 -->
+		
 
 	</div>
 </div>

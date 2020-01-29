@@ -1,7 +1,7 @@
 <h1><%= @room.name %></h1>
 
 <h4>参加者</h4>
-<% @entries.each do |e| %>
+<% @user_rooms.each do |e| %>
   <%= link_to e.user.name, user_path(e.user_id) %>
 <% end %>
 
@@ -11,6 +11,6 @@
   <input type="text" id="chat-input" data-behavior="room_speaker">
 </form>
 
-<div id="direct_messages" data-room_id="<%= @room.id %>">
-  <%= render @chats %>
+<div id="chats" data-room_id="<%= @room.id %>">
+  <%= render partial: 'chats/chat', collection: @chats %>
 </div>

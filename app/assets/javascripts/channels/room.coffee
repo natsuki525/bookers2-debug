@@ -1,15 +1,15 @@
 
 document.addEventListener 'turbolinks:load', ->
-  App.room = App.cable.subscriptions.create { channel: "RoomChannel", room: $('#direct_messages').data('room_id') },
+  App.room = App.cable.subscriptions.create { channel: "RoomChannel", room: $('#chats').data('room_id') },
     connected: ->
 
     disconnected: ->
 
     received: (data) ->
-      $('#direct_messages').append data['direct_message']
+      $('#chats').append data['chat']
 
-    speak: (direct_message) ->
-      @perform 'speak', direct_message: direct_message
+    speak: (chat) ->
+      @perform 'speak', chat: chat
 
   $('#chat-input').on 'keypress', (event) ->
     if event.keyCode is 13

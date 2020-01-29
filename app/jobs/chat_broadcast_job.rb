@@ -8,6 +8,6 @@ class ChatBroadcastJob < ApplicationJob
 
   private
   	def render_chat(chat)
-  		AppricationController.render.render partial: 'chat/chat',locals: {chat: chat}
+  		AppricationController.renderer.render partial: 'chats/chat',locals: {chat: chat}
   	end
 end

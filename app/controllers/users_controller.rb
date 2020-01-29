@@ -6,6 +6,24 @@ class UsersController < ApplicationController
   	@user = User.find(params[:id])
   	@books = @user.books
     @book = Book.find(params[:id]) #new bookの新規投稿で必要（保存処理はbookコントローラー側で実施）
+    # 以下チャット機能のため追加
+    @currentUserUserRoom = UserRoom.where(user_id: current_user.id)
+    @userUserRoom = UserRoom.where(user_id: @user.id)
+    unless @user.id == current_user.id
+      @currentUserUserRoom.each do |cu|
+        @userUserRoom.each do |u|
+          if cu.room_id == u.room_id then
+            @isRoom = true
+            @roomId = cu.room_id
+          end
+        end
+      end
+
+      unless @isRoom
+        @room = Room.new
+        @UserRoom = UserRoom.new
+      end
+    end
   end
 
   def index
